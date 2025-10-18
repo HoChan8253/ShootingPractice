@@ -692,9 +692,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324855f945255d04a8d62d9c538d2ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 5
   player: {fileID: 0}
-  baseSpeed: 2
+  baseSpeed: 3
   playerTag: Player
   wallTag: Wall
 --- !u!135 &-8089059330135676011

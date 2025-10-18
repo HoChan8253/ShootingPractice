@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 13
-  lifeTime: 5
+  lifeTime: 3
   enemyTag: Enemy
 --- !u!136 &-219611932791605552
 CapsuleCollider:

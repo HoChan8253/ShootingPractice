@@ -5,11 +5,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Info")]
-    [SerializeField] private int hp = 3;
+    [SerializeField] private int hp = 5;
 
     [Header("Movement")]
     [SerializeField] private Transform player;
-    [SerializeField] private float baseSpeed = 2f;
+    [SerializeField] private float baseSpeed = 3f;
+    [SerializeField] private float rotateSpeed = 100f;
     
     [Header("Tags")]
     [SerializeField] private string playerTag = "Player";
@@ -17,27 +18,21 @@ public class Enemy : MonoBehaviour
  
     private void Update()
     {
-        transform.Translate(Vector3.back * baseSpeed * Time.deltaTime);
+        transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
+        transform.Translate(Vector3.back * baseSpeed * Time.deltaTime, Space.World);
     }
 
     public void Hit()
     {
         hp--;
-        if (hp < 0)
+        if (hp <= 0)
         {
             Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        var bullet = other.GetComponent<Bullet>();
-        if(bullet != null)
-        {
-            Hit();
-            Destroy(other.gameObject);
-        }
-        
+    {                
         if(other.CompareTag("Player"))
         {
             Destroy(other.gameObject);

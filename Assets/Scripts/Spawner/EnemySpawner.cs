@@ -4,23 +4,41 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Header("Prefab")]
     [SerializeField] private GameObject enemyPrefab;
+
+    [Header("Settings")]
     [SerializeField] private float spawnDelay = 1.5f;
+    [SerializeField] private int limit = 0;
 
-    private float timer = 0f;
+    [Header("Coordinate")]
+    [SerializeField] private float xMin = -5f;
+    [SerializeField] private float xMax = 5f;
+    [SerializeField] private float yPos = 0.5f;
+    [SerializeField] private float zPos = 11f;
 
-    void Update()
+    private void Start()
     {
-        timer += Time.deltaTime;
+        StartCoroutine(SpawnLoop());
+    }
 
-        if(timer >= spawnDelay)
+    private IEnumerator SpawnLoop()
+    {
+        int spawned = 0;
+
+        while (true)
         {
-            timer = 0f;
-
-            float randomX = Random.Range(-5f, 5f);
-            Vector3 spawnPos = new Vector3(randomX, 0f, 8f);
-
+            if (limit > 0 && spawned >= limit)
+            {
+                yield break;
+            }
+            
+            float randomX = Random.Range(xMin, xMax);
+            Vector3 spawnPos = new Vector3(randomX, 0f, zPos);
             Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            yield return new WaitForSeconds(spawnDelay);
+
+            spawned++;
         }
     }
 }

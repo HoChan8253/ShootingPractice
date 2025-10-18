@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 public class Bullet : MonoBehaviour
 {
     [SerializeField][Range(1f, 30f)] private float bulletSpeed;
-    [SerializeField] private float lifeTime = 5f;
+    [SerializeField] private float lifeTime = 3f;
     [SerializeField] private string enemyTag = "Enemy";
     void Start()
     {
@@ -25,11 +25,12 @@ public class Bullet : MonoBehaviour
         {
             return;
         }
-    
+
+        Enemy enemy = other.GetComponent<Enemy>();
         if(other.CompareTag(enemyTag))
         {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
+            enemy.Hit();
         }
+        Destroy(gameObject);
     }
 }
