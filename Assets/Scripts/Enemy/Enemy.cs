@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {                
         if(other.CompareTag("Player"))

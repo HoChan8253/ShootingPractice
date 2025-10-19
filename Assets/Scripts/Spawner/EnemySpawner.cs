@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     {
         StartCoroutine(SpawnLoop());
     }
-
+    
     private IEnumerator SpawnLoop()
     {
         int spawned = 0;
@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
             }
             
             float randomX = Random.Range(xMin, xMax);
-            Vector3 spawnPos = new Vector3(randomX, 0f, zPos);
+            Vector3 spawnPos = new Vector3(randomX, yPos, zPos);
             Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
             yield return new WaitForSeconds(spawnDelay);
 
